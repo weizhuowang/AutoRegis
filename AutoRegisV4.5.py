@@ -124,11 +124,20 @@ def LogInGmail(user,password):
 def CheckEmail(mail,freq,i):
 	time.sleep(freq)
 	mail.select(folder)
-	result, data = mail.search(None, '(BODY "'+CRN+'")')
-	 
+
+	# CRN 1 
+	result, data = mail.search(None, '(BODY "'+'55128'+'")')
 	ids = data[0]
 	id_list = ids.split()
-	newsize = len(id_list)
+	newsize1 = len(id_list)
+
+	# CRN2
+	result, data = mail.search(None, '(BODY "'+'63422'+'")')
+	ids = data[0]
+	id_list = ids.split()
+	newsize2 = len(id_list)
+
+	newsize = newsize1 + newsize2
 
 	# Re login every 3 hours
 	if (i*freq)%(3*3600) == 0:
@@ -164,7 +173,7 @@ def autoRegister(driver,netid,delay):
 		print 'Continue to register ',CRN
 		# Put CRN in box
 		CRNreg = driver.find_element_by_xpath("//input[@id='crn_id1']")
-		CRNreg.send_keys(CRN)
+		CRNreg.send_keys('55128')
 		CRNreg = driver.find_element_by_xpath("//input[@id='crn_id2']")
 		CRNreg.send_keys('63422')
 		# Drop the class
@@ -265,10 +274,17 @@ if netid == False:
 # ==========Initialize===========
 # Email
 mailobj = LogInGmail(gmail[0],gmail[1])
-result, data = mailobj.search(None, '(BODY "'+CRN+'")')
+result, data = mailobj.search(None, '(BODY "'+'55128'+'")')
 ids = data[0] 								  # data is a list.
 id_list = ids.split() 						  # ids is a space separated string
-size = len(id_list) 						  # get the latest
+size1 = len(id_list) 						  # get the latest
+
+result, data = mailobj.search(None, '(BODY "'+'63422'+'")')
+ids = data[0] 								  # data is a list.
+id_list = ids.split() 						  # ids is a space separated string
+size2 = len(id_list) 						  # get the latest
+
+size = size1 + size2
 
 print 'Inbox size:',size
 print 'Checking for:',CRN
