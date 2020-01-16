@@ -166,7 +166,7 @@ def autoRegister(driver,netid,delay):
 		CRNreg = driver.find_element_by_xpath("//input[@id='crn_id1']")
 		CRNreg.send_keys(CRN)
 		CRNreg = driver.find_element_by_xpath("//input[@id='crn_id2']")
-		CRNreg.send_keys('70302')
+		CRNreg.send_keys('63422')
 		# Drop the class
 		try:
 			dropdown = driver.find_element_by_xpath("//input[@name='CRN_IN' and @value='"+CRNdrop+"']/../../td[2]/select[1]")
@@ -216,7 +216,8 @@ def AskInfo():
 	print '|You need to leave this window open in order to auto register for classes.'
 	print '|Your password will NOT be saved, it will be asked every time this script is run.\n'
 	print '|| Enter 0 if you dont wish to drop any course.\n'
-	CRN      = raw_input("Course CRN to register: ")
+	# CRN      = raw_input("Course CRN to register: ")
+	CRN = '55128'
 	CRNdrop  = raw_input("    Course CRN to drop: ")
 	netid[0] = raw_input("            Your NetID: ")
 	netid[1] = raw_input("    Password for NetID: ")
